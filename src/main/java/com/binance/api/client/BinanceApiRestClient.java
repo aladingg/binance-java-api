@@ -203,6 +203,18 @@ public interface BinanceApiRestClient {
   List<Order> getAllOrders(AllOrdersRequest orderRequest);
 
   /**
+   * Get all account orders; active, canceled, or filled.
+   *
+   * @param symbol symbol to get orders from
+   * @param orderId order id to get
+   * @param startTime start time
+   * @param endTime end time
+   * @param limit default 500, max 1000
+   * @return a list of all account orders
+   */
+  List<Order> getAllOrders(String symbol, Long orderId, Long startTime, Long endTime, Integer limit);
+
+  /**
    * Get current account information.
    */
   Account getAccount(Long recvWindow, Long timestamp);

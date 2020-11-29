@@ -119,6 +119,12 @@ public interface BinanceApiService {
                                    @Query("limit") Integer limit, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/api/v3/allOrders")
+    Call<List<Order>> getAllOrders(@Query("symbol") String symbol, @Query("orderId") Long orderId, @Query("startTime") Long startTime,
+                                   @Query("endTime") Long endTime, @Query("limit") Integer limit, @Query("recvWindow") Long recvWindow,
+                                   @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/account")
     Call<Account> getAccount(@Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
