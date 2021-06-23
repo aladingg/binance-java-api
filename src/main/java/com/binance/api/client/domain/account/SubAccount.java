@@ -1,13 +1,15 @@
 package com.binance.api.client.domain.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SubAccount {
-    private Long subaccountId;
+    @JsonProperty("subaccountId")
+    private String subAccountId;
     private String email;
     private BigDecimal makerCommission;
     private BigDecimal takerCommission;
@@ -18,7 +20,7 @@ public class SubAccount {
     @Override
     public String toString() {
         return "SubAccount{" +
-                "subaccountId=" + subaccountId +
+                "subAccountId='" + subAccountId + '\'' +
                 ", email='" + email + '\'' +
                 ", makerCommission=" + makerCommission +
                 ", takerCommission=" + takerCommission +
@@ -28,12 +30,12 @@ public class SubAccount {
                 '}';
     }
 
-    public Long getSubaccountId() {
-        return subaccountId;
+    public String getSubAccountId() {
+        return subAccountId;
     }
 
-    public void setSubaccountId(Long subaccountId) {
-        this.subaccountId = subaccountId;
+    public void setSubAccountId(String subAccountId) {
+        this.subAccountId = subAccountId;
     }
 
     public String getEmail() {
