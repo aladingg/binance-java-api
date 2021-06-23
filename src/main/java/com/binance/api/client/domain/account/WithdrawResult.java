@@ -10,35 +10,13 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WithdrawResult {
 
-    /**
-     * Withdraw message.
-     */
-    private String msg;
-
-    /**
-     * Withdraw success.
-     */
-    private boolean success;
-
-    /**
-     * Withdraw id.
-     */
     private String id;
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
+    @Override
+    public String toString() {
+        return "WithdrawResult{" +
+                "id='" + id + '\'' +
+                '}';
     }
 
     public String getId() {
@@ -48,15 +26,4 @@ public class WithdrawResult {
     public void setId(String id) {
         this.id = id;
     }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("msg", msg)
-                .append("success", success)
-                .append("id", id)
-                .toString();
-    }
-
-
 }
