@@ -7,6 +7,7 @@ import com.binance.api.client.security.AuthenticationInterceptor;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.apache.commons.lang3.StringUtils;
 import retrofit2.Call;
 import retrofit2.Converter;
@@ -54,8 +55,16 @@ public class BinanceApiServiceGenerator {
             retrofitBuilder.client(sharedClient);
         } else {
             // `adaptedClient` will use its own interceptor, but share thread pool etc with the 'parent' client
-            AuthenticationInterceptor interceptor = new AuthenticationInterceptor(apiKey, secret);
-            OkHttpClient adaptedClient = sharedClient.newBuilder().addInterceptor(interceptor).build();
+            AuthenticationInterceptor authenticationInterceptor = new AuthenticationInterceptor(apiKey, secret);
+
+            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+//            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+
+            OkHttpClient adaptedClient = sharedClient.newBuilder()
+                    .addInterceptor(authenticationInterceptor)
+                    .addInterceptor(httpLoggingInterceptor)
+                    .build();
             retrofitBuilder.client(adaptedClient);
         }
 
@@ -72,7 +81,6 @@ public class BinanceApiServiceGenerator {
             if (response.isSuccessful()) {
                 return response.body();
             } else {
-                System.out.println(response.errorBody().string());
                 BinanceApiError apiError = getBinanceApiError(response);
                 throw new BinanceApiException(apiError);
             }

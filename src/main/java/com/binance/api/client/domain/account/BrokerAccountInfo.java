@@ -2,12 +2,14 @@ package com.binance.api.client.domain.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.math.BigDecimal;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BrokerAccountInfo {
-    private Long maxMakerCommission;
-    private Long minMakerCommission;
-    private Long maxTakerCommission;
-    private Long minTakerCommission;
+    private BigDecimal maxMakerCommission;
+    private BigDecimal minMakerCommission;
+    private BigDecimal maxTakerCommission;
+    private BigDecimal minTakerCommission;
     private Long subAccountQty;
     private Long maxSubAccountQty;
 
@@ -23,35 +25,35 @@ public class BrokerAccountInfo {
                 '}';
     }
 
-    public Long getMaxMakerCommission() {
+    public BigDecimal getMaxMakerCommission() {
         return maxMakerCommission;
     }
 
-    public void setMaxMakerCommission(Long maxMakerCommission) {
+    public void setMaxMakerCommission(BigDecimal maxMakerCommission) {
         this.maxMakerCommission = maxMakerCommission;
     }
 
-    public Long getMinMakerCommission() {
+    public BigDecimal getMinMakerCommission() {
         return minMakerCommission;
     }
 
-    public void setMinMakerCommission(Long minMakerCommission) {
+    public void setMinMakerCommission(BigDecimal minMakerCommission) {
         this.minMakerCommission = minMakerCommission;
     }
 
-    public Long getMaxTakerCommission() {
+    public BigDecimal getMaxTakerCommission() {
         return maxTakerCommission;
     }
 
-    public void setMaxTakerCommission(Long maxTakerCommission) {
+    public void setMaxTakerCommission(BigDecimal maxTakerCommission) {
         this.maxTakerCommission = maxTakerCommission;
     }
 
-    public Long getMinTakerCommission() {
+    public BigDecimal getMinTakerCommission() {
         return minTakerCommission;
     }
 
-    public void setMinTakerCommission(Long minTakerCommission) {
+    public void setMinTakerCommission(BigDecimal minTakerCommission) {
         this.minTakerCommission = minTakerCommission;
     }
 
