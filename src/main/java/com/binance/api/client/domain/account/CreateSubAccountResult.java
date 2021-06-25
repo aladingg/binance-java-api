@@ -2,21 +2,20 @@ package com.binance.api.client.domain.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateSubAccountResult {
     @JsonProperty("subaccountId")
     private String subAccountId;
     private String email;
-    private String tab;
+    private String tag;
 
     @Override
     public String toString() {
         return "CreateSubAccountResult{" +
                 "subAccountId='" + subAccountId + '\'' +
                 ", email='" + email + '\'' +
-                ", tab='" + tab + '\'' +
+                ", tab='" + tag + '\'' +
                 '}';
     }
 
@@ -36,11 +35,11 @@ public class CreateSubAccountResult {
         this.email = email;
     }
 
-    public String getTab() {
-        return tab;
+    public String getTag() {
+        return tag;
     }
 
-    public void setTab(String tab) {
-        this.tab = tab;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
