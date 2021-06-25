@@ -294,6 +294,21 @@ public interface BinanceApiRestClient {
     CreateSubAccountResult createSubAccount(String tag);
 
     /**
+     * Create Sub Account Api Key
+     */
+    SubAccountApiKey createSubAccountApiKey(String subAccountId, boolean canTrade);
+
+    /**
+     * Get Sub Account Api Key (Without Secret Key)
+     */
+    List<SubAccountApiKey> getSubAccountApiKey(String subAccountId);
+
+    /**
+     * Delete Sub Account Api Key
+     */
+    void deleteSubAccountApiKey(String subAccountId, String apiKey);
+
+    /**
      * Get Broker Account Info
      */
     BrokerAccountInfo getBrokerAccountInfo();

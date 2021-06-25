@@ -308,6 +308,29 @@ public interface BinanceApiService {
             @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/sapi/v1/broker/subAccountApi")
+    Call<SubAccountApiKey> createSubAccountApiKey(
+            @Query("subAccountId") String subAccountId,
+            @Query("canTrade") boolean canTrade,
+            @Query("recvWindow") Long recvWindow,
+            @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/sapi/v1/broker/subAccountApi")
+    Call <List<SubAccountApiKey>> getSubAccountApiKey(
+            @Query("subAccountId") String subAccountId,
+            @Query("recvWindow") Long recvWindow,
+            @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @DELETE("/sapi/v1/broker/subAccountApi")
+    Call<Void> deleteSubAccountApiKey(
+            @Query("subAccountId") String subAccountId,
+            @Query("subAccountApiKey") String subAccountApiKey,
+            @Query("recvWindow") Long recvWindow,
+            @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/sapi/v1/broker/info")
     Call<BrokerAccountInfo> getBrokerAccountInfo(
             @Query("recvWindow") Long recvWindow,

@@ -229,6 +229,21 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     }
 
     @Override
+    public SubAccountApiKey createSubAccountApiKey(String subAccountId, boolean canTrade) {
+        return executeSync(binanceApiService.createSubAccountApiKey(subAccountId, canTrade, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
+    @Override
+    public List<SubAccountApiKey> getSubAccountApiKey(String subAccountId) {
+        return executeSync(binanceApiService.getSubAccountApiKey(subAccountId, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
+    @Override
+    public void deleteSubAccountApiKey(String subAccountId, String apiKey) {
+        executeSync(binanceApiService.deleteSubAccountApiKey(subAccountId, apiKey, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
+    @Override
     public BrokerAccountInfo getBrokerAccountInfo() {
         return executeSync(binanceApiService.getBrokerAccountInfo(BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
