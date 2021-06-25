@@ -15,7 +15,7 @@ public class CreateSubAccountResult {
         return "CreateSubAccountResult{" +
                 "subAccountId='" + subAccountId + '\'' +
                 ", email='" + email + '\'' +
-                ", tab='" + tag + '\'' +
+                ", tag='" + tag + '\'' +
                 '}';
     }
 
