@@ -51,11 +51,6 @@ public interface BinanceApiAsyncRestClient {
      */
     void getExchangeInfo(BinanceApiCallback<ExchangeInfo> callback);
 
-    /**
-     * ALL supported assets and whether or not they can be withdrawn.
-     */
-    void getAllAssets(BinanceApiCallback<List<Asset>> callback);
-
     // Market Data endpoints
 
     /**

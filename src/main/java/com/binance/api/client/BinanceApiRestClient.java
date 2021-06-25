@@ -6,6 +6,7 @@ import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import com.binance.api.client.domain.general.Coin;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.Asset;
 import com.binance.api.client.domain.market.AggTrade;
@@ -45,9 +46,9 @@ public interface BinanceApiRestClient {
     ExchangeInfo getExchangeInfo();
 
     /**
-     * @return All the supported assets and whether or not they can be withdrawn.
+     * @return All Token Binance Support Depositing and Withdrawing
      */
-    List<Asset> getAllAssets();
+    List<Coin> getAllCoins();
 
     // Market Data endpoints
 

@@ -9,6 +9,7 @@ import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.event.ListenKey;
 import com.binance.api.client.domain.general.Asset;
+import com.binance.api.client.domain.general.Coin;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.ServerTime;
 import com.binance.api.client.domain.market.*;
@@ -35,8 +36,9 @@ public interface BinanceApiService {
     @GET("/api/v1/exchangeInfo")
     Call<ExchangeInfo> getExchangeInfo();
 
-    @GET
-    Call<List<Asset>> getAllAssets(@Url String url);
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/sapi/v1/capital/config/getall")
+    Call<List<Coin>> getAllCoins(@Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
     // Market data endpoints
 
