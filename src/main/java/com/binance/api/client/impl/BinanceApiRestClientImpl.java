@@ -202,8 +202,8 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     }
 
     @Override
-    public DepositAddress getDepositAddress(String asset) {
-        return executeSync(binanceApiService.getDepositAddress(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    public DepositAddress getDepositAddress(String network, String coin) {
+        return executeSync(binanceApiService.getDepositAddress(coin, network, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
 
     // User stream endpoints
@@ -217,6 +217,8 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     public void keepAliveUserDataStream(String listenKey) {
         executeSync(binanceApiService.keepAliveUserDataStream(listenKey));
     }
+
+    // Sub Account endpoints
 
     @Override
     public void closeUserDataStream(String listenKey) {
@@ -264,7 +266,7 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     }
 
     @Override
-    public SubAccountDepositAddress getSubAccountDepositAddress(String email, String coin, String network) {
+    public DepositAddress getSubAccountDepositAddress(String email, String coin, String network) {
         return executeSync(binanceApiService.querySubAccountDepositAddress(email, coin, network, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
 

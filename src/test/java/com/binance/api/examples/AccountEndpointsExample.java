@@ -25,7 +25,5 @@ public class AccountEndpointsExample {
     List<Trade> myTrades = client.getMyTrades("NEOETH");
     System.out.println(myTrades);
 
-    // Get deposit address
-    System.out.println(client.getDepositAddress("ETH"));
   }
 }

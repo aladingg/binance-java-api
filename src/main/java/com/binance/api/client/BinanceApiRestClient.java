@@ -259,9 +259,9 @@ public interface BinanceApiRestClient {
     /**
      * Fetch deposit address.
      *
-     * @return deposit address for a given asset.
+     * @return deposit address.
      */
-    DepositAddress getDepositAddress(String asset);
+    DepositAddress getDepositAddress(String network, String coin);
 
     // User stream endpoints
 
@@ -326,7 +326,7 @@ public interface BinanceApiRestClient {
     /**
      * Get Sub Account Deposit Address
      */
-    SubAccountDepositAddress getSubAccountDepositAddress(String email, String coin, String network);
+    DepositAddress getSubAccountDepositAddress(String email, String coin, String network);
 
     /**
      * Get Sub Account Deposit History

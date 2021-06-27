@@ -10,53 +10,50 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DepositAddress {
 
-  private String address;
+    private String address;
+    private String tag;
+    private String coin;
+    private String url;
 
-  private boolean success;
+    @Override
+    public String toString() {
+        return "DepositAddress{" +
+                "address='" + address + '\'' +
+                ", tag='" + tag + '\'' +
+                ", coin='" + coin + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
 
-  private String addressTag;
+    public String getAddress() {
+        return address;
+    }
 
-  private String asset;
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-  public String getAddress() {
-    return address;
-  }
+    public String getTag() {
+        return tag;
+    }
 
-  public void setAddress(String address) {
-    this.address = address;
-  }
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
-  public boolean isSuccess() {
-    return success;
-  }
+    public String getCoin() {
+        return coin;
+    }
 
-  public void setSuccess(boolean success) {
-    this.success = success;
-  }
+    public void setCoin(String coin) {
+        this.coin = coin;
+    }
 
-  public String getAddressTag() {
-    return addressTag;
-  }
+    public String getUrl() {
+        return url;
+    }
 
-  public void setAddressTag(String addressTag) {
-    this.addressTag = addressTag;
-  }
-
-  public String getAsset() {
-    return asset;
-  }
-
-  public void setAsset(String asset) {
-    this.asset = asset;
-  }
-
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
-        .append("address", address)
-        .append("success", success)
-        .append("addressTag", addressTag)
-        .append("asset", asset)
-        .toString();
-  }
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }
