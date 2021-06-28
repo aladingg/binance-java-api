@@ -377,6 +377,20 @@ public interface BinanceApiService {
             @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/sapi/v1/broker/transfer")
+    Call<List<SubAccountTransferRecord>> getSubAccountTransferHistory(
+            @Query("fromId") String fromId,
+            @Query("toId") String toId,
+            @Query("clientTranId") String clientTranId,
+            @Query("showAllStatus") boolean showAllStatus,
+            @Query("startTime") Long startTime,
+            @Query("endTime") Long endTime,
+            @Query("page") Integer page,
+            @Query("limit") Integer limit,
+            @Query("recvWindow") Long recvWindow,
+            @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/sapi/v1/capital/withdraw/apply")
     Call<WithdrawResult> withdraw(
             @Query("coin") String coin,

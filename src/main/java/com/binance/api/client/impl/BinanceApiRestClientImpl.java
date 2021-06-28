@@ -286,4 +286,20 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
         return executeSync(binanceApiService.subAccountTransfer(fromId, toId, clientTranId, coin, amount.toPlainString(), BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
 
+    @Override
+    public SubAccountTransferRecord getSubAccountTransfer(String clientTransId) {
+        List<SubAccountTransferRecord> subAccountTransferRecords = executeSync(binanceApiService.getSubAccountTransferHistory(null, null, clientTransId, true, null, null, null, null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+
+        if (subAccountTransferRecords.size() == 1) {
+            return subAccountTransferRecords.get(0);
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<SubAccountTransferRecord> getSubAccountTransferHistory(Date startTime, Date endTime, int page, int size) {
+        return executeSync(binanceApiService.getSubAccountTransferHistory(null, null, null, true, startTime.getTime(), endTime.getTime(), page, size, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
 }

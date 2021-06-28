@@ -340,4 +340,8 @@ public interface BinanceApiRestClient {
 
 
     SubAccountTransferResult subAccountTransfer(String fromId, String toId, String clientTranId, String coin, BigDecimal amount);
+
+    SubAccountTransferRecord getSubAccountTransfer(String clientTransId);
+
+    List<SubAccountTransferRecord> getSubAccountTransferHistory(Date startTime, Date endTime, int page, int size);
 }
