@@ -353,5 +353,8 @@ public interface BinanceApiRestClient {
      */
     List<SubAccountTransferRecord> getSubAccountTransferHistory(Date startTime, Date endTime, int page, int size);
 
+    /**
+     * Query Withdraw List
+     */
     List<Withdraw> getWithdrawHistory(String coin, Withdraw.Status status, int offset, int limit, Date startTime, Date endTime);
 }
