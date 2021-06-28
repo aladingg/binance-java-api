@@ -37,6 +37,8 @@ public class BinanceApiServiceGenerator {
                 .build();
     }
 
+    private static final AuthenticationInterceptor authenticationInterceptor = new AuthenticationInterceptor(null, null);
+
     @SuppressWarnings("unchecked")
     private static final Converter<ResponseBody, BinanceApiError> errorBodyConverter =
             (Converter<ResponseBody, BinanceApiError>)converterFactory.responseBodyConverter(
@@ -54,9 +56,7 @@ public class BinanceApiServiceGenerator {
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(secret)) {
             retrofitBuilder.client(sharedClient);
         } else {
-            // `adaptedClient` will use its own interceptor, but share thread pool etc with the 'parent' client
-            AuthenticationInterceptor authenticationInterceptor = new AuthenticationInterceptor(apiKey, secret);
-
+            authenticationInterceptor.setApiKey(apiKey, secret);
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
 //            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);

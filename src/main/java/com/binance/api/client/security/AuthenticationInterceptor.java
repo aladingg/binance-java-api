@@ -17,11 +17,16 @@ import java.util.Objects;
  */
 public class AuthenticationInterceptor implements Interceptor {
 
-    private final String apiKey;
+    private String apiKey;
 
-    private final String secret;
+    private String secret;
 
     public AuthenticationInterceptor(String apiKey, String secret) {
+        this.apiKey = apiKey;
+        this.secret = secret;
+    }
+
+    public void setApiKey(String apiKey, String secret) {
         this.apiKey = apiKey;
         this.secret = secret;
     }

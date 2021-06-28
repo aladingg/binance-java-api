@@ -1,11 +1,9 @@
 package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiRestClient;
-import com.binance.api.client.config.BinanceApiConfig;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.*;
-import com.binance.api.client.domain.general.Asset;
 import com.binance.api.client.domain.general.Coin;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.market.*;
