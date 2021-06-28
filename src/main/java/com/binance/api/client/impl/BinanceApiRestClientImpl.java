@@ -13,8 +13,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import static com.binance.api.client.impl.BinanceApiServiceGenerator.createService;
-import static com.binance.api.client.impl.BinanceApiServiceGenerator.executeSync;
+import static com.binance.api.client.impl.BinanceApiServiceGenerator.*;
 
 /**
  * Implementation of Binance's REST API using Retrofit with synchronous/blocking method calls.
@@ -23,8 +22,24 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 
     private final BinanceApiService binanceApiService;
 
+    private final String mainAccountApiKey;
+    private final String mainAccountSecret;
+
     public BinanceApiRestClientImpl(String apiKey, String secret) {
+        mainAccountApiKey = apiKey;
+        mainAccountSecret = secret;
+
         binanceApiService = createService(BinanceApiService.class, apiKey, secret);
+    }
+
+    public BinanceApiRestClient withMainAccount() {
+        switchApiKey(mainAccountApiKey, mainAccountSecret);
+        return this;
+    }
+
+    public BinanceApiRestClient withSubAccount(String apiKey, String secret) {
+        switchApiKey(apiKey, secret);
+        return this;
     }
 
     // General endpoints
@@ -301,7 +316,7 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     }
 
     @Override
-    public List<Withdraw> getWithdrawHistory(String coin, Withdraw.Status status, int offset , int limit, Date startTime, Date endTime) {
+    public List<Withdraw> getWithdrawHistory(String coin, Withdraw.Status status, int offset, int limit, Date startTime, Date endTime) {
         return executeSync(binanceApiService.getWithdrawHistory(coin, status.getStatus(), offset , limit, startTime.getTime(), endTime.getTime(), BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
 

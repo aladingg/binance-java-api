@@ -48,6 +48,10 @@ public class BinanceApiServiceGenerator {
         return createService(serviceClass, null, null);
     }
 
+    public static void switchApiKey(String apiKey, String secret) {
+        authenticationInterceptor.setApiKey(apiKey, secret);
+    }
+
     public static <S> S createService(Class<S> serviceClass, String apiKey, String secret) {
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .baseUrl(BinanceApiConfig.getApiBaseUrl())
