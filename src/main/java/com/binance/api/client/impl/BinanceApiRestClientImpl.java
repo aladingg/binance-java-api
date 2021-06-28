@@ -32,11 +32,13 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
         binanceApiService = createService(BinanceApiService.class, apiKey, secret);
     }
 
+    @Override
     public BinanceApiRestClient withMainAccount() {
         switchApiKey(mainAccountApiKey, mainAccountSecret);
         return this;
     }
 
+    @Override
     public BinanceApiRestClient withSubAccount(String apiKey, String secret) {
         switchApiKey(apiKey, secret);
         return this;

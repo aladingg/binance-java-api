@@ -28,6 +28,10 @@ public interface BinanceApiRestClient {
 
     // General endpoints
 
+    BinanceApiRestClient withMainAccount();
+
+    BinanceApiRestClient withSubAccount(String apiKey, String secret);
+
     /**
      * Test connectivity to the Rest API.
      */
