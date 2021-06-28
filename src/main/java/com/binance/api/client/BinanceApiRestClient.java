@@ -338,10 +338,20 @@ public interface BinanceApiRestClient {
      */
     WithdrawResult withdraw(String coin, String withdrawOrderId, String network, String address, String addressTag, BigDecimal amount, String name);
 
-
+    /**
+     * Sub Account Transfer
+     */
     SubAccountTransferResult subAccountTransfer(String fromId, String toId, String clientTranId, String coin, BigDecimal amount);
 
+    /**
+     * Query Sub Account Transfer By ClientTranId
+     */
     SubAccountTransferRecord getSubAccountTransfer(String clientTransId);
 
+    /**
+     * Query Sub Account Transfer List
+     */
     List<SubAccountTransferRecord> getSubAccountTransferHistory(Date startTime, Date endTime, int page, int size);
+
+    List<Withdraw> getWithdrawHistory(String coin, Withdraw.Status status, int offset, int limit, Date startTime, Date endTime);
 }

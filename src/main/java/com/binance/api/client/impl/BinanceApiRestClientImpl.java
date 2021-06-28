@@ -276,12 +276,6 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     }
 
     @Override
-    public WithdrawResult withdraw(String coin, String withdrawOrderId, String network, String address, String addressTag, BigDecimal amount, String name) {
-        return executeSync(binanceApiService.withdraw(coin, withdrawOrderId, network, address, addressTag, amount.toPlainString(),
-                true, name, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
-    }
-
-    @Override
     public SubAccountTransferResult subAccountTransfer(String fromId, String toId, String clientTranId, String coin, BigDecimal amount) {
         return executeSync(binanceApiService.subAccountTransfer(fromId, toId, clientTranId, coin, amount.toPlainString(), BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
@@ -300,6 +294,17 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     @Override
     public List<SubAccountTransferRecord> getSubAccountTransferHistory(Date startTime, Date endTime, int page, int size) {
         return executeSync(binanceApiService.getSubAccountTransferHistory(null, null, null, true, startTime.getTime(), endTime.getTime(), page, size, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
+    @Override
+    public WithdrawResult withdraw(String coin, String withdrawOrderId, String network, String address, String addressTag, BigDecimal amount, String name) {
+        return executeSync(binanceApiService.withdraw(coin, withdrawOrderId, network, address, addressTag, amount.toPlainString(),
+                true, name, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
+    @Override
+    public List<Withdraw> getWithdrawHistory(String coin, Withdraw.Status status, int offset , int limit, Date startTime, Date endTime) {
+        return executeSync(binanceApiService.getWithdrawHistory(coin, status.getStatus(), offset , limit, startTime.getTime(), endTime.getTime(), BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
 
 }
