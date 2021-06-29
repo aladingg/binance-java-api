@@ -2,7 +2,6 @@ package com.binance.api.client.domain.account;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.math.BigDecimal;
@@ -10,7 +9,6 @@ import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SubAccountDeposit {
-    @JsonProperty("subaccountId")
     private String subAccountId;
     private String address;
     private String addressTag;
