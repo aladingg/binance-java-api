@@ -67,6 +67,16 @@ public class BinanceApiClientFactory {
     }
 
     /**
+     * New instance without proxy
+     *
+     * @return the binance api client factory
+     */
+    public static BinanceApiClientFactory newInstance(String apiKey, String secret) {
+        return new BinanceApiClientFactory(apiKey, secret, null, null);
+    }
+
+
+    /**
      * New instance without authentication.
      *
      * @return the binance api client factory
