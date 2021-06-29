@@ -62,8 +62,8 @@ public class BinanceApiClientFactory {
      *
      * @return the binance api client factory
      */
-    public static BinanceApiClientFactory newInstance(String apiKey, String secret) {
-        return new BinanceApiClientFactory(apiKey, secret);
+    public static BinanceApiClientFactory newInstance(String apiKey, String secret, String proxyHost, Integer proxyPort) {
+        return new BinanceApiClientFactory(apiKey, secret, proxyHost, proxyPort);
     }
 
     /**
