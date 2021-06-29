@@ -8,7 +8,6 @@ import com.binance.api.client.domain.TimeInForce;
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.event.ListenKey;
-import com.binance.api.client.domain.general.Asset;
 import com.binance.api.client.domain.general.Coin;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.ServerTime;
@@ -16,8 +15,6 @@ import com.binance.api.client.domain.market.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
-import java.math.BigDecimal;
-import java.security.PrivateKey;
 import java.util.List;
 
 /**
@@ -336,6 +333,8 @@ public interface BinanceApiService {
     @GET("/sapi/v1/broker/subAccount")
     Call<List<SubAccount>> querySubAccount(
             @Query("subAccountId") String subAccountId,
+            @Query("page") Integer page,
+            @Query("size") Integer size,
             @Query("recvWindow") Long recvWindow,
             @Query("timestamp") Long timestamp);
 
@@ -344,15 +343,6 @@ public interface BinanceApiService {
     Call<List<SubAccount>> querySubAccounts(
             @Query("page") Long page,
             @Query("size") Long size,
-            @Query("recvWindow") Long recvWindow,
-            @Query("timestamp") Long timestamp);
-
-    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/sapi/v1/capital/deposit/subAddress")
-    Call<DepositAddress> querySubAccountDepositAddress(
-            @Query("email") String email,
-            @Query("coin") String coin,
-            @Query("network") String network,
             @Query("recvWindow") Long recvWindow,
             @Query("timestamp") Long timestamp);
 
@@ -423,6 +413,5 @@ public interface BinanceApiService {
             @Query("network") String network,
             @Query("recvWindow") Long recvWindow,
             @Query("timestamp") Long timestamp);
-
 
 }

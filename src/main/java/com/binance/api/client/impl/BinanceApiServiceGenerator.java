@@ -17,6 +17,8 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -44,15 +46,19 @@ public class BinanceApiServiceGenerator {
             (Converter<ResponseBody, BinanceApiError>)converterFactory.responseBodyConverter(
                     BinanceApiError.class, new Annotation[0], null);
 
-    public static <S> S createService(Class<S> serviceClass) {
-        return createService(serviceClass, null, null);
-    }
-
     public static void switchApiKey(String apiKey, String secret) {
         authenticationInterceptor.setApiKey(apiKey, secret);
     }
 
+    public static <S> S createService(Class<S> serviceClass) {
+        return createService(serviceClass, null, null, null, null);
+    }
+
     public static <S> S createService(Class<S> serviceClass, String apiKey, String secret) {
+        return createService(serviceClass, apiKey, secret, null, null);
+    }
+
+    public static <S> S createService(Class<S> serviceClass, String apiKey, String secret, String proxyHost, Integer proxyPort) {
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .baseUrl(BinanceApiConfig.getApiBaseUrl())
                 .addConverterFactory(converterFactory);
@@ -60,21 +66,31 @@ public class BinanceApiServiceGenerator {
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(secret)) {
             retrofitBuilder.client(sharedClient);
         } else {
-            authenticationInterceptor.setApiKey(apiKey, secret);
-            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-//            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+            OkHttpClient.Builder okHttpBuilder = sharedClient.newBuilder();
 
-            OkHttpClient adaptedClient = sharedClient.newBuilder()
-                    .addInterceptor(authenticationInterceptor)
-                    .addInterceptor(httpLoggingInterceptor)
-                    .build();
+            // Signing
+            authenticationInterceptor.setApiKey(apiKey, secret);
+            okHttpBuilder.addInterceptor(authenticationInterceptor);
+
+            // Logging
+            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            okHttpBuilder.addInterceptor(httpLoggingInterceptor);
+
+            // Proxy
+            if (proxyHost != null && proxyPort != null) {
+                okHttpBuilder.proxy(new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(proxyHost, proxyPort)));
+            }
+
+            OkHttpClient adaptedClient = okHttpBuilder.build();
             retrofitBuilder.client(adaptedClient);
         }
 
         Retrofit retrofit = retrofitBuilder.build();
         return retrofit.create(serviceClass);
     }
+
+
 
     /**
      * Execute a REST call and block until the response is received.

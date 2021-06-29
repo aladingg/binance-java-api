@@ -11,6 +11,7 @@ public class SubAccount {
     @JsonProperty("subaccountId")
     private String subAccountId;
     private String email;
+    private String tag;
     private BigDecimal makerCommission;
     private BigDecimal takerCommission;
     private BigDecimal marginMakerCommission;
@@ -22,12 +23,21 @@ public class SubAccount {
         return "SubAccount{" +
                 "subAccountId='" + subAccountId + '\'' +
                 ", email='" + email + '\'' +
+                ", tag='" + tag + '\'' +
                 ", makerCommission=" + makerCommission +
                 ", takerCommission=" + takerCommission +
                 ", marginMakerCommission=" + marginMakerCommission +
                 ", marginTakerCommission=" + marginTakerCommission +
                 ", createTime=" + createTime +
                 '}';
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getSubAccountId() {

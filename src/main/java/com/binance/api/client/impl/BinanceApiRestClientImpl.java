@@ -26,10 +26,14 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     private final String mainAccountSecret;
 
     public BinanceApiRestClientImpl(String apiKey, String secret) {
+        this(apiKey, secret, null, null);
+    }
+
+    public BinanceApiRestClientImpl(String apiKey, String secret, String proxyHost, Integer proxyPort) {
         mainAccountApiKey = apiKey;
         mainAccountSecret = secret;
 
-        binanceApiService = createService(BinanceApiService.class, apiKey, secret);
+        binanceApiService = createService(BinanceApiService.class, apiKey, secret, proxyHost, proxyPort);
     }
 
     @Override
@@ -267,7 +271,7 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 
     @Override
     public SubAccount getSubAccount(String subAccountId) {
-        List<SubAccount> subAccounts = executeSync(binanceApiService.querySubAccount(subAccountId, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+        List<SubAccount> subAccounts = executeSync(binanceApiService.querySubAccount(subAccountId, 1, 500, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
         if (subAccounts.size() == 1) {
             return subAccounts.get(0);
         }
@@ -276,13 +280,8 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     }
 
     @Override
-    public List<SubAccount> getSubAccounts(Long page, Long size) {
-        return executeSync(binanceApiService.querySubAccounts(page, size, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
-    }
-
-    @Override
-    public DepositAddress getSubAccountDepositAddress(String email, String coin, String network) {
-        return executeSync(binanceApiService.querySubAccountDepositAddress(email, coin, network, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    public List<SubAccount> getSubAccounts(Integer page, Integer size) {
+        return executeSync(binanceApiService.querySubAccount(null, page, size, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
 
     @Override
