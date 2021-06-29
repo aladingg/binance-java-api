@@ -258,6 +258,8 @@ public interface BinanceApiRestClient {
 
     // User stream endpoints
 
+    List<Deposit> getDepositHistory(String coin, DepositStatus depositStatus, Date startTime, Date endTime, Integer offset, Integer limit);
+
     /**
      * Start a new user data stream.
      *

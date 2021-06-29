@@ -225,6 +225,15 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
         return executeSync(binanceApiService.getDepositAddress(coin, network, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
     }
 
+    @Override
+    public List<Deposit> getDepositHistory(String coin, DepositStatus depositStatus, Date startTime, Date endTime, Integer offset, Integer limit) {
+        Integer status = depositStatus == null ? null : depositStatus.getStatus();
+        Long sTime = startTime == null ? null : startTime.getTime();
+        Long eTime = endTime == null ? null : endTime.getTime();
+
+        return executeSync(binanceApiService.getDepositHistory(coin, status, sTime, eTime, offset, limit, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
     // User stream endpoints
 
     @Override

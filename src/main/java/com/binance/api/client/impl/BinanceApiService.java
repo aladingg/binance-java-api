@@ -414,4 +414,15 @@ public interface BinanceApiService {
             @Query("recvWindow") Long recvWindow,
             @Query("timestamp") Long timestamp);
 
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/sapi/v1/capital/deposit/hisrec")
+    Call<List<Deposit>> getDepositHistory(
+            @Query("coin") String coin,
+            @Query("status") Integer status,
+            @Query("startTime") Long startTime,
+            @Query("endTime") Long endTime,
+            @Query("offset") Integer offset,
+            @Query("limit") Integer limit,
+            @Query("recvWindow") Long recvWindow,
+            @Query("timestamp") Long timestamp);
 }

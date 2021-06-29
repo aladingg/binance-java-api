@@ -1,88 +1,120 @@
 package com.binance.api.client.domain.account;
 
-import com.binance.api.client.constant.BinanceApiConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * A deposit that was done to a Binance account.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Deposit {
+    private BigDecimal amount;
+    private String coin;
+    private String network;
+    private DepositStatus status;
+    private String address;
+    private String addressTag;
+    private String txId;
+    private Date insertTime;
+    private TransferType transferType;
+    private String confirmTimes;
 
-  /**
-   * Amount deposited.
-   */
-  private String amount;
+    @Override
+    public String toString() {
+        return "Deposit{" +
+                "amount=" + amount +
+                ", coin='" + coin + '\'' +
+                ", network='" + network + '\'' +
+                ", status=" + status +
+                ", address='" + address + '\'' +
+                ", addressTag='" + addressTag + '\'' +
+                ", txId='" + txId + '\'' +
+                ", insertTime=" + insertTime +
+                ", transferType=" + transferType +
+                ", confirmTimes='" + confirmTimes + '\'' +
+                '}';
+    }
 
-  /**
-   * Symbol.
-   */
-  private String asset;
+    public BigDecimal getAmount() {
+        return amount;
+    }
 
-  /**
-   * Deposit time.
-   */
-  private String insertTime;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 
-  /**
-   * Transaction id
-   */
-  private String txId;
+    public String getCoin() {
+        return coin;
+    }
 
-  /**
-   * (0:pending,1:success)
-   */
-  private int status;
+    public void setCoin(String coin) {
+        this.coin = coin;
+    }
 
-  public String getAmount() {
-    return amount;
-  }
+    public String getNetwork() {
+        return network;
+    }
 
-  public void setAmount(String amount) {
-    this.amount = amount;
-  }
+    public void setNetwork(String network) {
+        this.network = network;
+    }
 
-  public String getAsset() {
-    return asset;
-  }
+    public DepositStatus getStatus() {
+        return status;
+    }
 
-  public void setAsset(String asset) {
-    this.asset = asset;
-  }
+    public void setStatus(DepositStatus status) {
+        this.status = status;
+    }
 
-  public String getInsertTime() {
-    return insertTime;
-  }
+    public String getAddress() {
+        return address;
+    }
 
-  public void setInsertTime(String insertTime) {
-    this.insertTime = insertTime;
-  }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-  public String getTxId() {
-    return txId;
-  }
+    public String getAddressTag() {
+        return addressTag;
+    }
 
-  public void setTxId(String txId) {
-    this.txId = txId;
-  }
+    public void setAddressTag(String addressTag) {
+        this.addressTag = addressTag;
+    }
 
-  public int getStatus() {
-    return status;
-  }
+    public String getTxId() {
+        return txId;
+    }
 
-  public void setStatus(int status) {
-    this.status = status;
-  }
+    public void setTxId(String txId) {
+        this.txId = txId;
+    }
 
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
-        .append("amount", amount)
-        .append("asset", asset)
-        .append("insertTime", insertTime)
-        .append("txId", txId)
-        .append("status", status)
-        .toString();
-  }
+    public Date getInsertTime() {
+        return insertTime;
+    }
+
+    public void setInsertTime(Date insertTime) {
+        this.insertTime = insertTime;
+    }
+
+    public TransferType getTransferType() {
+        return transferType;
+    }
+
+    public void setTransferType(TransferType transferType) {
+        this.transferType = transferType;
+    }
+
+    public String getConfirmTimes() {
+        return confirmTimes;
+    }
+
+    public void setConfirmTimes(String confirmTimes) {
+        this.confirmTimes = confirmTimes;
+    }
 }
+
