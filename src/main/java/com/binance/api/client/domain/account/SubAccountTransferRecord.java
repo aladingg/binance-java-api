@@ -2,7 +2,6 @@ package com.binance.api.client.domain.account;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,35 +18,34 @@ public class SubAccountTransferRecord {
     private Status status;
 
     public enum Status {
-        INIT(1),
-        PROCESS(2),
-        SUCCESS(3),
-        FAILURE(4);
+        INIT("INIT"),
+        PROCESS("PROCESS"),
+        SUCCESS("SUCCESS"),
+        FAILURE("FAILURE");
 
-        private final int status;
+        private final String status;
 
         @JsonCreator
-        public Status from(int status) {
-            if (INIT.getStatus() == status) {
+        public Status from(String status) {
+            if (INIT.getStatus().equals(status)) {
                 return INIT;
-            } else if (PROCESS.getStatus() == status) {
+            } else if (PROCESS.getStatus().equals(status)) {
                 return PROCESS;
-            } else if (SUCCESS.getStatus() == status) {
+            } else if (SUCCESS.getStatus().equals(status)) {
                 return SUCCESS;
-            } else if (FAILURE.getStatus() == status) {
+            } else if (FAILURE.getStatus().equals(status)) {
                 return FAILURE;
             } else {
                 return null;
             }
         }
 
-        @JsonValue
-        public int getStatus() {
-            return status;
+        Status(String status) {
+            this.status = status;
         }
 
-        Status(int status) {
-            this.status = status;
+        public String getStatus() {
+            return status;
         }
     }
 
