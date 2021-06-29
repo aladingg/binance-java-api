@@ -74,7 +74,7 @@ public class BinanceApiServiceGenerator {
 
             // Logging
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
             okHttpBuilder.addInterceptor(httpLoggingInterceptor);
 
             // Proxy
