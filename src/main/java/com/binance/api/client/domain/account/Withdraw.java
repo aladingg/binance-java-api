@@ -1,10 +1,8 @@
 package com.binance.api.client.domain.account;
 
-import com.binance.api.client.constant.BinanceApiConstants;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonValue;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
@@ -21,10 +19,37 @@ public class Withdraw {
     private String id;
     private String withdrawOrderId;
     private String network;
-    private Integer transferType;
+    private TransferType transferType;
     private Status status;
     private BigDecimal transactionFee;
     private String txId;
+
+    public enum TransferType {
+        INTERNAL(1),        // 站内
+        EXTERNAL(2);        // 站外
+
+        private final int type;
+
+        @JsonValue
+        public int getType() {
+            return type;
+        }
+
+        @JsonCreator
+        public TransferType from(int type) {
+            if (INTERNAL.getType() == type) {
+                return INTERNAL;
+            } else if (EXTERNAL.getType() == type) {
+                return EXTERNAL;
+            } else {
+                return null;
+            }
+        }
+
+        TransferType(int type) {
+            this.type = type;
+        }
+    }
 
     public enum Status {
         EMAIL_SENT(0),      // 已发送确认Email
@@ -141,11 +166,11 @@ public class Withdraw {
         this.network = network;
     }
 
-    public Integer getTransferType() {
+    public TransferType getTransferType() {
         return transferType;
     }
 
-    public void setTransferType(Integer transferType) {
+    public void setTransferType(TransferType transferType) {
         this.transferType = transferType;
     }
 
