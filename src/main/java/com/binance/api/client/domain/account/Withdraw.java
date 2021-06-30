@@ -25,8 +25,8 @@ public class Withdraw {
     private String txId;
 
     public enum TransferType {
-        INTERNAL(1),        // 站内
-        EXTERNAL(2);        // 站外
+        EXTERNAL(0),        // 站外
+        INTERNAL(1);        // 站内
 
         private final int type;
 
