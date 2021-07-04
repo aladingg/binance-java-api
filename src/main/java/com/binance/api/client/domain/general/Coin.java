@@ -118,6 +118,14 @@ public class Coin {
         return name;
     }
 
+    public Boolean getTrading() {
+        return trading;
+    }
+
+    public Boolean getWithdrawAllEnable() {
+        return withdrawAllEnable;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
